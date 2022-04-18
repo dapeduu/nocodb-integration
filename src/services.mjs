@@ -27,7 +27,7 @@ export async function payMember(value, memberId) {
 
 export async function distributeValue(value, projectId) {
   const projectData = await getProjectById(projectId);
-  const membersList = projectData.MembrosMMList;
+  const membersList = projectData?.MembrosMMList;
 
   const memberValue = Number(value * 0.11);
   const memberPercentage = (memberValue / membersList.length).toFixed(2);

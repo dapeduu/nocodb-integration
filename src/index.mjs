@@ -15,6 +15,7 @@ app.post("/pay", async (req, res) => {
   if (!value || !projectId) res.json("No value or projectId found on body");
 
   await distributeValue(value, projectId);
+
   res.json("Values distributed correctly");
 });
 
