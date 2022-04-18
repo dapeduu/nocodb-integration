@@ -6,6 +6,10 @@ const port = 3000;
 
 app.use(json());
 
+app.get("/", (_, res) => {
+  res.json("Hello world");
+});
+
 app.post("/pay", async (req, res) => {
   const { value, projectId } = req.body;
   if (!value || !projectId) res.json("No value or projectId found on body");
