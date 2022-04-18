@@ -2,7 +2,7 @@ import "dotenv/config";
 import express, { json } from "express";
 import { distributeValue } from "./services.mjs";
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(json());
 
