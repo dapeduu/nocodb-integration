@@ -24,10 +24,7 @@ app.post("/pay", async (req, res) => {
     await distributeValue(value, projectId);
     res.json("Values distributed correctly");
   } catch (error) {
-    res.json({
-      errorMessage: "There was an error while distributing the values",
-      customMessage: error.errorMessage,
-    });
+    res.json(error.message);
   }
 });
 
