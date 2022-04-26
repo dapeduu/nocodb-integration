@@ -40,9 +40,9 @@ export async function distributeValue(value, projectId) {
   const memberValue = Number(value * 0.11);
   const memberPercentage = (memberValue / membersList.length).toFixed(2);
 
-  await Promise.all(
+  const res = await Promise.all(
     membersList.map((member) => payMember(memberPercentage, member.id))
   );
 
-  console.log("distributeValueParamsFinal");
+  console.log("distributeValueParamsFinal", res);
 }
