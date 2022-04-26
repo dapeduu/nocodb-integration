@@ -8,7 +8,7 @@ const port = process.env.PORT;
 app.use(json());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.CORS,
   })
 );
 
@@ -20,9 +20,15 @@ app.post("/pay", async (req, res) => {
   const { value, projectId } = req.body;
   if (!value || !projectId) res.json("No value or projectId found on body");
 
-  await distributeValue(value, projectId);
-
-  res.json("Values distributed correctly");
+  try {
+    await distributeValue(value, projectId);
+    res.json("Values distributed correctly");
+  } catch (error) {
+    res.json({
+      errorMessage: "There was an error while distributing the values",
+      customMessage: error.errorMessage,
+    });
+  }
 });
 
 app.listen(port, () => {

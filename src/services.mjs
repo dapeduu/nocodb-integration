@@ -28,13 +28,11 @@ export async function payMember(value, memberId) {
 export async function distributeValue(value, projectId) {
   const projectData = await getProjectById(projectId);
   if (!projectData) {
-    console.log("No project found with the following params");
     console.log("distributeValueParams", {
       value,
       projectId,
     });
-
-    return;
+    throw new Error("No project found with the params given");
   }
 
   const membersList = projectData?.MembrosMMList;
