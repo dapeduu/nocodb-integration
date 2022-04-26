@@ -43,4 +43,6 @@ export async function distributeValue(value, projectId) {
   await Promise.all(
     membersList.map((member) => payMember(memberPercentage, member.id))
   );
+
+  console.log("distributeValueParamsFinal");
 }
