@@ -11,7 +11,7 @@ app.use(
     origin: process.env.CORS,
   })
 );
-// app.use(pino());
+app.use(pino());
 app.use(json());
 
 app.get("/", (req, res) => {
