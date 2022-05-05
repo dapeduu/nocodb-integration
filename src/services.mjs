@@ -12,12 +12,10 @@ export async function getProjectById(id) {
 
 export async function payMember(value, memberId) {
   try {
-    const { data } = await api.post(
-      `/Membros/${memberId}/Pagamento dos Membros`,
-      {
-        Valor: value,
-      }
-    );
+    const { data } = await api.post(`/PagamentosDosMembros`, {
+      Valor: value,
+      nc_sqlv__membro_id: memberId,
+    });
 
     return data;
   } catch (error) {
@@ -26,16 +24,12 @@ export async function payMember(value, memberId) {
 }
 
 export async function distributeValue(value, projectId) {
-  console.log("distributeValueParams", {
-    value,
-    projectId,
-  });
   const projectData = await getProjectById(projectId);
   if (!projectData) {
     throw new Error("No project found with the params given");
   }
 
-  const membersList = projectData?.MembrosMMList;
+  const membersList = projectData?.Membros;
 
   const memberValue = Number(value * 0.11);
   const memberPercentage = (memberValue / membersList.length).toFixed(2);
@@ -44,5 +38,5 @@ export async function distributeValue(value, projectId) {
     membersList.map((member) => payMember(memberPercentage, member.id))
   );
 
-  console.log("distributeValueParamsFinal", res);
+  return res;
 }
